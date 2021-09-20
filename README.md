@@ -53,15 +53,15 @@ to download the MobileNet model and labels file:
 
 ```
 # The script takes an argument specifying where you want to save the model files
-bash download.sh /tmp
+bash download.sh ./models
 ```
 
 ## Run the example
 
 ```
 python3 detect.py \
-  --model /tmp/detect.tflite \
-  --labels /tmp/coco_labels.txt \
+  --model ./models/detect.tflite \
+  --labels ./models/coco_labels.txt \
   --thresh 0.4
 ```
 
