@@ -62,7 +62,7 @@ bash download.sh ./models
 python3 detect.py \
   --model ./models/detect.tflite \
   --labels ./models/coco_labels.txt \
-  --thresh 0.4
+  --threshold 0.5
 ```
 
 You should see the camera feed appear on the monitor attached to your Raspberry

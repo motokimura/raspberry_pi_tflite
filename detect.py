@@ -84,9 +84,13 @@ def annotate_objects(cv2_frame, results, labels):
                                   color=(0, 0, 255),
                                   thickness=3)
         cv2_frame = cv2.putText(
-            cv2_frame, '%s %.2f' % (labels[obj['class_id']], obj['score']),
-            (xmin + 5, ymin + 30), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 0, 255),
-            2)
+            cv2_frame,
+            f'{labels[obj["class_id"]]} {obj["score"]:.2f}',
+            (xmin + 5, ymin + 30),
+            fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+            fontScale=1.0,
+            color=(0, 0, 255),
+            thickness=2)
 
     return cv2_frame
 
@@ -104,7 +108,7 @@ def main():
                         help='Score threshold for detected objects.',
                         required=False,
                         type=float,
-                        default=0.4)
+                        default=0.5)
     args = parser.parse_args()
 
     labels = load_labels(args.labels)
@@ -125,7 +129,7 @@ def main():
         results = detect_objects(interpreter, image, args.threshold)
         elapsed_ms = (time.monotonic() - start_time) * 1000
 
-        print(elapsed_ms, results)
+        print(f'elapsed [ms]: {elapsed_ms:.1f}')
         cv2_frame = annotate_objects(cv2_frame, results, labels)
 
         cv2.imshow('detection result', cv2_frame)
